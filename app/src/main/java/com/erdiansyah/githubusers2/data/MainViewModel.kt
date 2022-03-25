@@ -1,6 +1,7 @@
 package com.erdiansyah.githubusers2.data
 
 import android.util.Log
+import androidx.activity.viewModels
 import androidx.lifecycle.*
 import com.erdiansyah.githubusers2.app.ApiConfig
 import kotlinx.coroutines.launch
@@ -8,7 +9,7 @@ import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Callback
 
-class MainViewModel(private val preferences: ThemeSettingPreferences): ViewModel() {
+class MainViewModel(private val preferences: ThemeSettingPreferences) : ViewModel() {
     private val _userList = MutableLiveData<ArrayList<ItemsItem>>()
     val userList: LiveData<ArrayList<ItemsItem>> = _userList
 

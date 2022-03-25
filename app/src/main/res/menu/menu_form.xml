@@ -5,7 +5,12 @@
         android:id="@+id/action_favorite"
         android:icon="@drawable/ic_favorite"
         android:title="@string/favorite"
-        app:showAsAction="always">
+        app:showAsAction="always"/>
+    <item
+        android:id="@+id/action_theme"
+        android:icon="@drawable/ic_settings"
+        android:title="@string/theme_setting"
+        app:showAsAction="ifRoom">
         <menu>
             <item
                 android:title="@string/light_theme"
@@ -15,10 +20,5 @@
                 android:id="@+id/dark_theme"/>
         </menu>
     </item>
-    <item
-        android:id="@+id/action_theme"
-        android:icon="@drawable/ic_settings"
-        android:title="@string/theme_setting"
-        app:showAsAction="ifRoom" />
 
 </menu>

@@ -13,15 +13,19 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.erdiansyah.githubusers2.R
 import com.erdiansyah.githubusers2.data.ItemsItem
 import com.erdiansyah.githubusers2.data.MainViewModel
+import com.erdiansyah.githubusers2.data.ThemeSettingPreferences
+import com.erdiansyah.githubusers2.data.ViewModelFactory
 import com.erdiansyah.githubusers2.databinding.ActivityMainBinding
 
 private val Context.themeDataStore: DataStore<Preferences> by preferencesDataStore(name = "theme settings")
@@ -29,14 +33,20 @@ private val Context.themeDataStore: DataStore<Preferences> by preferencesDataSto
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private val viewModel: MainViewModel by viewModels()
+    //private val viewModel: MainViewModel by viewModels()
     private lateinit var rvUser: RecyclerView
     private val list =  ArrayList<ItemsItem>()
+    private lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val preferences = ThemeSettingPreferences.getInstance(themeDataStore)
+        viewModel = ViewModelProvider(this, ViewModelFactory(preferences)).get(
+            MainViewModel::class.java
+        )
         rvUser =  binding.rvUser
         val adapter = UserListAdapter(list)
         rvUser.adapter = adapter
@@ -103,7 +113,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        //R.id.action_theme ->
+        when (item.itemId) {
+            R.id.light_theme -> {
+                viewModel.getTheme().observe(this) {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    viewModel.saveTheme(false)
+                }
+            }
+            R.id.dark_theme -> {
+                viewModel.getTheme().observe(this) {
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                    viewModel.saveTheme(true)
+                }
+            }
+        }
         return super.onOptionsItemSelected(item)
     }
 }
