@@ -18,4 +18,8 @@
     <string name="repositories2">%d Public Repository</string>
     <string name="hello_blank_fragment">Hello Fragment</string>
     <string name="tab_foll_section">TabFollSection</string>
+    <string name="theme_setting">Setting tema</string>
+    <string name="favorite">favorite</string>
+    <string name="light_theme">light theme</string>
+    <string name="dark_theme">dark theme</string>
 </resources>

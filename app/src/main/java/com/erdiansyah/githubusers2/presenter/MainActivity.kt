@@ -7,16 +7,24 @@ import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.KeyEvent
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.erdiansyah.githubusers2.R
 import com.erdiansyah.githubusers2.data.ItemsItem
 import com.erdiansyah.githubusers2.data.MainViewModel
 import com.erdiansyah.githubusers2.databinding.ActivityMainBinding
+
+private val Context.themeDataStore: DataStore<Preferences> by preferencesDataStore(name = "theme settings")
 
 class MainActivity : AppCompatActivity() {
 
@@ -87,5 +95,15 @@ class MainActivity : AppCompatActivity() {
     fun hideKeyboard(activity: Activity, view: View) {
         val inputMethodManager: InputMethodManager = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(view.applicationWindowToken, 0)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_form, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        //R.id.action_theme ->
+        return super.onOptionsItemSelected(item)
     }
 }
