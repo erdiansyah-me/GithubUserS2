@@ -14,7 +14,7 @@ import com.erdiansyah.githubusers2.R
 class FrontScreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        val timeDelay: Long = 2000
         setContentView(R.layout.activity_front_screen)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -29,6 +29,6 @@ class FrontScreenActivity : AppCompatActivity() {
             val toMainActivityIntent = Intent(this, MainActivity::class.java)
             startActivity(toMainActivityIntent)
             finish()
-        }, 2000)
+        }, timeDelay)
     }
 }

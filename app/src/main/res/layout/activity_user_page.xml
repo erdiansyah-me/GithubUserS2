@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/view_detail_user_page"
     android:layout_height="match_parent"
     tools:context=".presenter.UserPageActivity">
     <View
@@ -155,8 +156,11 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout"
+        app:layout_constraintVertical_bias="0.0">
+    </androidx.viewpager2.widget.ViewPager2>
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -170,5 +174,15 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:visibility="visible" />
 
-
+    <ToggleButton
+        android:id="@+id/btn_favorit"
+        android:layout_width="50dp"
+        android:textOff=""
+        android:textOn=""
+        android:layout_height="50dp"
+        android:focusableInTouchMode="false"
+        android:background="@drawable/favorit_button"
+        android:focusable="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

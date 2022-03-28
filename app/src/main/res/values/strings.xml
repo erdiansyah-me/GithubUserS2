@@ -14,6 +14,7 @@
     <string name="follower">%d Followers</string>
     <string name="follower2">%d Follower</string>
     <string name="following">%d Following</string>
+    <string name="favorit_page">Favorit User List</string>
     <string name="repositories">%d Public Repositories</string>
     <string name="repositories2">%d Public Repository</string>
     <string name="hello_blank_fragment">Hello Fragment</string>
@@ -22,4 +23,5 @@
     <string name="favorite">favorite</string>
     <string name="light_theme">light theme</string>
     <string name="dark_theme">dark theme</string>
+    <string name="floating_add_favorite">floating add favorit button</string>
 </resources>

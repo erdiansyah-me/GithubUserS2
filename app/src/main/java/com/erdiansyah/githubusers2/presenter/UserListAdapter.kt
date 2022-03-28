@@ -22,7 +22,7 @@ class UserListAdapter(private val itemUser: ArrayList<ItemsItem>) : RecyclerView
         this.onItemClickListener = onItemClickListener
     }
 
-    class ListViewHolder(var binding: ItemUserListBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class ListViewHolder(var binding: ItemUserListBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         val binding = ItemUserListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -49,10 +49,10 @@ class UserListAdapter(private val itemUser: ArrayList<ItemsItem>) : RecyclerView
 
     override fun getItemCount(): Int = itemUser.size
 
-    fun setUserList( user: ArrayList<ItemsItem>){
+    fun setUserList(user: ArrayList<ItemsItem>){
+        val diffUtil = DiffUtilList(oldUserItem, user)
         itemUser.clear()
         itemUser.addAll(user)
-        val diffUtil = DiffUtilList(oldUserItem, user)
         val diffResults = DiffUtil.calculateDiff(diffUtil)
         oldUserItem = user
         diffResults.dispatchUpdatesTo(this)

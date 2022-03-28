@@ -4,14 +4,21 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.StringRes
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.erdiansyah.githubusers2.R
 import com.erdiansyah.githubusers2.data.UserData
 import com.erdiansyah.githubusers2.data.SharedViewModel
+import com.erdiansyah.githubusers2.data.db.FavoritUser
 import com.erdiansyah.githubusers2.databinding.ActivityUserPageBinding
 import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class UserPageActivity : AppCompatActivity() {
 
@@ -40,6 +47,39 @@ class UserPageActivity : AppCompatActivity() {
             visibleLoading(it)
         }
         tabSections(dataBundle)
+
+        var isFavorit = false
+        CoroutineScope(Dispatchers.IO).launch {
+            val count = username?.let { userPageViewModel.checkFavorit(it) }?.toInt()
+            withContext(Dispatchers.Main) {
+                if (count != null) {
+                    if (count > 0) {
+                        binding.btnFavorit.isChecked = true
+                        isFavorit = true
+                    } else {
+                        binding.btnFavorit.isChecked = false
+                        isFavorit = false
+                    }
+                }
+            }
+        }
+
+        binding.btnFavorit.setOnClickListener {
+            isFavorit = !isFavorit
+            if (isFavorit){
+                userPageViewModel.userData.value?.let { userData ->
+                    userPageViewModel.insertUserFavorit(
+                        userData.login, userData.avatarUrl)
+                }
+                Toast.makeText(applicationContext,"User telah ditambahkan ke list favorit", Toast.LENGTH_SHORT).show()
+            } else {
+                if (username != null) {
+                    userPageViewModel.deleteNonFav(username)
+                    Toast.makeText(applicationContext,"User telah dihapus dari list favorit", Toast.LENGTH_SHORT).show()
+                }
+            }
+            binding.btnFavorit.isChecked = isFavorit
+        }
     }
 
     private fun visibleLoading(isLoading: Boolean){
@@ -66,10 +106,12 @@ class UserPageActivity : AppCompatActivity() {
             }
         val following = resources.getString(R.string.following, userData.following)
 
+
         binding.tvUsername.text = userData.login
         binding.tvName.text = userData.name
         Glide.with(this)
             .load(userData.avatarUrl)
+            .error(R.drawable.ic_broken_image)
             .centerCrop()
             .into(binding.avaUserDetail)
         binding.tvFollowers.text = followers

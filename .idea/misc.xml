@@ -3,13 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/codif/AndroidStudioProjects/GithubUserS2/app/src/main/res/drawable/favorit_button.xml" value="0.1145" />
+        <entry key="..\:/Users/codif/AndroidStudioProjects/GithubUserS2/app/src/main/res/layout/activity_favorit.xml" value="0.152" />
         <entry key="..\:/Users/codif/AndroidStudioProjects/GithubUserS2/app/src/main/res/layout/activity_front_screen.xml" value="0.1" />
         <entry key="..\:/Users/codif/AndroidStudioProjects/GithubUserS2/app/src/main/res/layout/activity_front_splash_screen.xml" value="0.1" />
         <entry key="..\:/Users/codif/AndroidStudioProjects/GithubUserS2/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/Users/codif/AndroidStudioProjects/GithubUserS2/app/src/main/res/layout/activity_user_page.xml" value="0.536" />
+        <entry key="..\:/Users/codif/AndroidStudioProjects/GithubUserS2/app/src/main/res/layout/activity_user_page.xml" value="0.152" />
         <entry key="..\:/Users/codif/AndroidStudioProjects/GithubUserS2/app/src/main/res/layout/fragment_foll_section.xml" value="0.1468721668177697" />
         <entry key="..\:/Users/codif/AndroidStudioProjects/GithubUserS2/app/src/main/res/layout/fragment_follower.xml" value="0.264" />
         <entry key="..\:/Users/codif/AndroidStudioProjects/GithubUserS2/app/src/main/res/layout/fragment_following.xml" value="0.2" />
+        <entry key="..\:/Users/codif/AndroidStudioProjects/GithubUserS2/app/src/main/res/layout/fragment_user_list.xml" value="0.144" />
         <entry key="..\:/Users/codif/AndroidStudioProjects/GithubUserS2/app/src/main/res/layout/item_user_list.xml" value="1.2" />
         <entry key="..\:/Users/codif/AndroidStudioProjects/GithubUserS2/app/src/main/res/menu/menu_form.xml" value="0.1" />
       </map>

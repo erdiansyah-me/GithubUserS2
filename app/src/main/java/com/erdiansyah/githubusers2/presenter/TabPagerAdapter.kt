@@ -11,12 +11,12 @@ class TabPagerAdapter(activity: AppCompatActivity, bundle: Bundle) : FragmentSta
     override fun getItemCount(): Int = 2
 
     override fun createFragment(position: Int): Fragment {
-        var fragment:Fragment? = null
+        val fragment = UseListFragment()
         when (position){
-            0 -> fragment = FollowerFragment()
-            1 -> fragment = FollowingFragment()
+            0 -> dataBundle.putString(UseListFragment.TAB_NAME, UseListFragment.TAB_FOLLOWERS)
+            1 -> dataBundle.putString(UseListFragment.TAB_NAME, UseListFragment.TAB_FOLLOWING)
         }
-        fragment?.arguments = this.dataBundle
-        return fragment as Fragment
+        fragment.arguments = this.dataBundle
+        return fragment
     }
 }

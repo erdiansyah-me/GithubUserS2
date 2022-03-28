@@ -12,12 +12,11 @@ class DiffUtilList(
     override fun getNewListSize(): Int = newList.size
 
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return oldList[oldItemPosition].id == newList[newItemPosition].id
+        return oldList[oldItemPosition].login == newList[newItemPosition].login
     }
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
         return when {
-            oldList[oldItemPosition].id != newList[newItemPosition].id -> false
             oldList[oldItemPosition].login != newList[newItemPosition].login -> false
             oldList[oldItemPosition].avatarUrl != newList[newItemPosition].avatarUrl -> false
             else -> true

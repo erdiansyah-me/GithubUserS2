@@ -1,16 +1,26 @@
 package com.erdiansyah.githubusers2.data
 
+import android.app.Application
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import com.erdiansyah.githubusers2.app.ApiConfig
+import com.erdiansyah.githubusers2.data.db.FavoritUser
+import com.erdiansyah.githubusers2.data.db.FavoritUserDao
+import com.erdiansyah.githubusers2.data.db.FavoritUserRoomDb
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class SharedViewModel: ViewModel() {
-
+class SharedViewModel(application: Application): AndroidViewModel(application) {
+    private val favoritUserDao: FavoritUserDao
+    init {
+        val userDb = FavoritUserRoomDb.getInstance(application)
+        favoritUserDao = userDb.favoritUserDao()
+    }
     private val _userData = MutableLiveData<UserData>()
     val userData: LiveData<UserData> = _userData
 
@@ -41,6 +51,21 @@ class SharedViewModel: ViewModel() {
                 Log.e(TAG, "onFailure: ${t.message}")
             }
         })
+    }
+
+    fun getUser(): LiveData<List<FavoritUser>> = favoritUserDao.getUser()
+
+    fun insertUserFavorit(login: String, avatarUrl: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val user = FavoritUser(login,avatarUrl)
+            favoritUserDao.insertUser(user)
+        }
+    }
+    suspend fun checkFavorit(login: String) = favoritUserDao.checkUser(login)
+    fun deleteNonFav(login: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            favoritUserDao.deleteNonFav(login)
+        }
     }
 
     fun setFollowers(username: String){
