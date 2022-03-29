@@ -29,7 +29,6 @@ class FavoritActivity : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.title = getString(R.string.favorit_page)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
         rvUser= binding.rvUserListFav
         val adapter = UserListAdapter(list)
         rvUser.adapter = adapter
@@ -39,10 +38,8 @@ class FavoritActivity : AppCompatActivity() {
         }
 
         viewModel.getUser().observe(this){
-            if (it !== null) {
-                val listFavUser = listToArrayList(it)
-                adapter.setUserList(listFavUser)
-            }
+            val listFavUser = listToArrayList(it)
+            adapter.setUserList(listFavUser)
         }
         if (applicationContext.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             rvUser.layoutManager = GridLayoutManager(this, 2)

@@ -1,14 +1,14 @@
 package com.erdiansyah.githubusers2.data.db
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 import androidx.room.Query
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface FavoritUserDao {
 
     @Query("SELECT * FROM user")
-    fun getUser(): LiveData<List<FavoritUser>>
+    fun getUser(): Flow<List<FavoritUser>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertUser(user: FavoritUser)

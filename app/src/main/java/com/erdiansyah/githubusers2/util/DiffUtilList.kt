@@ -12,14 +12,16 @@ class DiffUtilList(
     override fun getNewListSize(): Int = newList.size
 
     override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-        return oldList[oldItemPosition].login == newList[newItemPosition].login
+        return oldList == newList
     }
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+        val old = oldList[oldItemPosition]
+        val latest = newList[newItemPosition]
         return when {
-            oldList[oldItemPosition].login != newList[newItemPosition].login -> false
-            oldList[oldItemPosition].avatarUrl != newList[newItemPosition].avatarUrl -> false
-            else -> true
+            old.login == latest.login -> true
+            old.avatarUrl == latest.avatarUrl -> true
+            else -> false
         }
     }
 }

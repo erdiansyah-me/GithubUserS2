@@ -7,12 +7,10 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.StringRes
-import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.erdiansyah.githubusers2.R
 import com.erdiansyah.githubusers2.data.UserData
 import com.erdiansyah.githubusers2.data.SharedViewModel
-import com.erdiansyah.githubusers2.data.db.FavoritUser
 import com.erdiansyah.githubusers2.databinding.ActivityUserPageBinding
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.CoroutineScope

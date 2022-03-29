@@ -9,7 +9,6 @@ import com.erdiansyah.githubusers2.data.db.FavoritUserDao
 import com.erdiansyah.githubusers2.data.db.FavoritUserRoomDb
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
@@ -53,7 +52,7 @@ class SharedViewModel(application: Application): AndroidViewModel(application) {
         })
     }
 
-    fun getUser(): LiveData<List<FavoritUser>> = favoritUserDao.getUser()
+    fun getUser(): LiveData<List<FavoritUser>> = favoritUserDao.getUser().asLiveData()
 
     fun insertUserFavorit(login: String, avatarUrl: String) {
         CoroutineScope(Dispatchers.IO).launch {

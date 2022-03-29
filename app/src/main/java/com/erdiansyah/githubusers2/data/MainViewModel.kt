@@ -1,9 +1,6 @@
 package com.erdiansyah.githubusers2.data
 
-import android.app.Application
 import android.util.Log
-import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.lifecycle.*
 import com.erdiansyah.githubusers2.app.ApiConfig
 import kotlinx.coroutines.launch
