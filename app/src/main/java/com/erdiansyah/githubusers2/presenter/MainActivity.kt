@@ -35,7 +35,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var rvUser: RecyclerView
     private val list =  ArrayList<ItemsItem>()
     private lateinit var viewModel: MainViewModel
-    private val TAB_FAVORIT = "tab_favorit"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -36,11 +36,18 @@ class FavoritActivity : AppCompatActivity() {
         viewModel.isLoading.observe(this){
             visibleLoading(it)
         }
-
         viewModel.getUser().observe(this){
             val listFavUser = listToArrayList(it)
             adapter.setUserList(listFavUser)
+            visibleLoading(false)
         }
+        binding.fabRefreshFav.setOnClickListener{
+            finish()
+            overridePendingTransition(0, 0)
+            startActivity(intent)
+            overridePendingTransition(0, 0)
+        }
+        rvUser.setHasFixedSize(true)
         if (applicationContext.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             rvUser.layoutManager = GridLayoutManager(this, 2)
         } else {
