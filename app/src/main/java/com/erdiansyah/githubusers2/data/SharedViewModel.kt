@@ -55,7 +55,7 @@ class SharedViewModel(application: Application): AndroidViewModel(application) {
     fun getUser(): LiveData<List<FavoritUser>> = favoritUserDao.getUser().asLiveData()
 
     fun insertUserFavorit(login: String, avatarUrl: String) {
-        CoroutineScope(Dispatchers.IO).launch {
+        viewModelScope.launch {
             val user = FavoritUser(login,avatarUrl)
             favoritUserDao.insertUser(user)
         }

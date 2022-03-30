@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -46,6 +47,7 @@ class FavoritActivity : AppCompatActivity() {
             overridePendingTransition(0, 0)
             startActivity(intent)
             overridePendingTransition(0, 0)
+            Toast.makeText(applicationContext,"Refresh Halaman",Toast.LENGTH_SHORT).show()
         }
         rvUser.setHasFixedSize(true)
         if (applicationContext.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
