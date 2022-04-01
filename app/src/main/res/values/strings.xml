@@ -23,6 +23,12 @@
     <string name="favorite">favorite</string>
     <string name="light_theme">light theme</string>
     <string name="dark_theme">dark theme</string>
-    <string name="floating_add_favorite">floating add favorit button</string>
-    <string name="refresh_page">Refresh Page</string>
+    <string name="favorit_user_empty">Silahkan Masukan User ke Favorit</string>
+    <string name="search_user_starter">Silahkan Lakukan Pencarian</string>
+    <string name="search_user_notfound">User Tidak Ditemukan</string>
+    <string name="search_user_failure">Terjadi Kesalahan\nSilahkan Coba Kembali</string>
+    <string name="search_user_query_empty">Silahkan Masukkan Keyword Pencarian</string>
+    <string name="follState">Foll</string>
+    <string name="Follower_empty">Tidak Ada Followers</string>
+    <string name="Following_empty">Tidak Ada Following</string>
 </resources>

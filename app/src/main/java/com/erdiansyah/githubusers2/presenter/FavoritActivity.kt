@@ -23,6 +23,7 @@ class FavoritActivity : AppCompatActivity() {
     private lateinit var rvUser: RecyclerView
     private val viewModel : SharedViewModel by viewModels()
     private val list =  ArrayList<ItemsItem>()
+    private lateinit var adapter: UserListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +32,7 @@ class FavoritActivity : AppCompatActivity() {
         supportActionBar?.title = getString(R.string.favorit_page)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         rvUser= binding.rvUserListFav
-        val adapter = UserListAdapter(list)
+        adapter = UserListAdapter(list)
         rvUser.adapter = adapter
 
         viewModel.isLoading.observe(this){
@@ -42,13 +43,7 @@ class FavoritActivity : AppCompatActivity() {
             adapter.setUserList(listFavUser)
             visibleLoading(false)
         }
-        binding.fabRefreshFav.setOnClickListener{
-            finish()
-            overridePendingTransition(0, 0)
-            startActivity(intent)
-            overridePendingTransition(0, 0)
-            Toast.makeText(applicationContext,"Refresh Halaman",Toast.LENGTH_SHORT).show()
-        }
+
         rvUser.setHasFixedSize(true)
         if (applicationContext.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
             rvUser.layoutManager = GridLayoutManager(this, 2)
@@ -60,6 +55,15 @@ class FavoritActivity : AppCompatActivity() {
                 showUserDetail(data)
             }
         })
+    }
+
+    override fun onResume() {
+        viewModel.getUser().observe(this){
+            val listFavUser = listToArrayList(it)
+            adapter.setUserList(listFavUser)
+            visibleLoading(false)
+        }
+        super.onResume()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -80,6 +84,11 @@ class FavoritActivity : AppCompatActivity() {
                 user.avatarUrl
             )
             listFavUser.add(convertedUserList)
+        }
+        if (listFavUser.size == 0){
+            binding.tvFavoritEmpty.visibility = View.VISIBLE
+        } else {
+            binding.tvFavoritEmpty.visibility = View.GONE
         }
         return listFavUser
     }

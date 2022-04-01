@@ -77,6 +77,9 @@ class MainActivity : AppCompatActivity() {
         viewModel.isLoading.observe(this){
             visibleLoading(it)
         }
+        viewModel.viewState.observe(this){
+            visibleTextUserNotFound(it)
+        }
         adapter.setOnItemClickListener(object: UserListAdapter.OnItemClickListener{
             override fun onItemClicked(data: ItemsItem) {
                 showUserDetail(data)
@@ -87,10 +90,39 @@ class MainActivity : AppCompatActivity() {
     private fun visibleLoading(isLoading: Boolean){
         binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
+
+    private fun visibleTextUserNotFound(viewState: MainViewModel.ViewState) {
+        when (viewState) {
+            MainViewModel.ViewState.empty -> {
+                binding.tvUserSearchStarter.text = getString(R.string.search_user_notfound)
+                binding.tvUserSearchStarter.visibility =  View.VISIBLE
+                binding.rvUser.visibility = View.GONE
+            }
+            MainViewModel.ViewState.avail -> {
+                binding.tvUserSearchStarter.visibility =  View.GONE
+                binding.rvUser.visibility = View.VISIBLE
+            }
+            MainViewModel.ViewState.default -> {
+                binding.tvUserSearchStarter.visibility =  View.VISIBLE
+                binding.rvUser.visibility = View.GONE
+            }
+            MainViewModel.ViewState.failure -> {
+                binding.tvUserSearchStarter.text = getString(R.string.search_user_failure)
+                binding.tvUserSearchStarter.visibility = View.VISIBLE
+                binding.rvUser.visibility = View.GONE
+            }
+            MainViewModel.ViewState.queryEmpty -> {
+                binding.tvUserSearchStarter.text = getString(R.string.search_user_query_empty)
+                binding.tvUserSearchStarter.visibility = View.VISIBLE
+                binding.rvUser.visibility = View.GONE
+            }
+        }
+
+    }
+
     private fun searchUser(){
         binding.apply {
             val searchQuery = edtSearchUser.text.toString()
-            if (searchQuery.isEmpty()) return
             visibleLoading(true)
             viewModel.searchUser(searchQuery)
         }

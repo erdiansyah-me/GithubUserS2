@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.erdiansyah.githubusers2.R
 import com.erdiansyah.githubusers2.data.ItemsItem
 import com.erdiansyah.githubusers2.data.SharedViewModel
 import com.erdiansyah.githubusers2.databinding.FragmentUserListBinding
@@ -50,6 +51,11 @@ class UseListFragment : Fragment() {
                 if (userList !== null) {
                     adapter.setUserList(userList)
                     visibleLoading(false)
+                    binding.tvFollState.visibility = View.GONE
+                    if (adapter.itemCount == 0) {
+                        binding.tvFollState.text = getString(R.string.Follower_empty)
+                        binding.tvFollState.visibility = View.VISIBLE
+                    }
                 }
             }
         } else if (tabName == TAB_FOLLOWING) {
@@ -57,6 +63,11 @@ class UseListFragment : Fragment() {
                 if (userList !== null) {
                     adapter.setUserList(userList)
                     visibleLoading(false)
+                    binding.tvFollState.visibility = View.GONE
+                    if (adapter.itemCount == 0) {
+                        binding.tvFollState.text = getString(R.string.Following_empty)
+                        binding.tvFollState.visibility = View.VISIBLE
+                    }
                 }
             }
         }
