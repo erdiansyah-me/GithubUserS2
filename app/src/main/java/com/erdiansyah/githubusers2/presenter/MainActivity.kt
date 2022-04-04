@@ -27,7 +27,7 @@ import com.erdiansyah.githubusers2.data.ThemeSettingPreferences
 import com.erdiansyah.githubusers2.data.ViewModelFactory
 import com.erdiansyah.githubusers2.databinding.ActivityMainBinding
 
-private val Context.themeDataStore: DataStore<Preferences> by preferencesDataStore(name = "theme settings")
+private val Context.themeDataStore: DataStore<Preferences> by preferencesDataStore(name = "theme_setting")
 
 class MainActivity : AppCompatActivity() {
 
@@ -42,9 +42,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val preferences = ThemeSettingPreferences.getInstance(themeDataStore)
-        viewModel = ViewModelProvider(this, ViewModelFactory(preferences)).get(
-            MainViewModel::class.java
-        )
+        viewModel = ViewModelProvider(this, ViewModelFactory(preferences))[MainViewModel::class.java]
         rvUser =  binding.rvUser
         val adapter = UserListAdapter(list)
         rvUser.adapter = adapter
@@ -85,6 +83,14 @@ class MainActivity : AppCompatActivity() {
                 showUserDetail(data)
             }
         })
+        viewModel.getTheme().observe(this) {
+            if (it) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
+            }
+        }
     }
 
     private fun visibleLoading(isLoading: Boolean){
@@ -145,16 +151,10 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.light_theme -> {
-                viewModel.getTheme().observe(this) {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                    viewModel.saveTheme(false)
-                }
+                viewModel.saveTheme(false)
             }
             R.id.dark_theme -> {
-                viewModel.getTheme().observe(this) {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                    viewModel.saveTheme(true)
-                }
+                viewModel.saveTheme(true)
             }
             R.id.action_favorite -> {
                 val favoritIntent = Intent(this@MainActivity, FavoritActivity::class.java)

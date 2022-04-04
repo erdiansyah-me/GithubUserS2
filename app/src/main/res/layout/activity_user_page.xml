@@ -10,7 +10,7 @@
         android:id="@+id/profile_back"
         android:layout_width="match_parent"
         android:layout_height="175dp"
-        android:background="@color/DarkBlue"
+        android:background="?colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -142,12 +142,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/viewPager2"
         app:layout_constraintTop_toBottomOf="@+id/tv_company"
-        app:tabTextColor="@color/DarkBlue"
         android:contentDescription="@string/tab_foll_section"/>
 
     <androidx.viewpager2.widget.ViewPager2
