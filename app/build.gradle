@@ -14,6 +14,8 @@ android {
         versionCode 2
         versionName "1.2"
 
+        buildConfigField("String", "KEY", API_KEY)
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
